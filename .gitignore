@@ -2,3 +2,7 @@
 build/
 compile_commands.json
 Dockerfile
+*.egg-info
+*.so
+__pycache__
+.vscode
