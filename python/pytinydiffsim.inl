@@ -8,7 +8,62 @@
         .. currentmodule:: pytinydiffsim
 
         .. autosummary::
+           :recursive:
            :toctree: _generate
+
+           TinyVectorX
+           TinyVector3
+           TinyGeometry
+           TinySphere
+           TinyPlane
+           TinyRigidBody
+           TinyQuaternion
+           TinyPose
+           TinyJointType
+
+           TinyWorld
+            TinyUrdfInertial
+            TinyGeometryTypes
+            TinyLink
+            RigidBodyInertia
+            TinyMultiBody
+            TinyContactPoint
+            TinyContactPointRigidBody
+            TinyContactPointMultiBody
+            TinyConstraintSolver
+            TinyMultiBodyConstraintSolver
+            TinyRaycast
+
+            TinyUrdfGeometry
+            TinyUrdfCollision
+            TinyUrdfVisual
+            TinyUrdfJoint
+            TinyUrdfLink
+            TinyUrdfStructures
+            UrdfToMultiBody2
+
+            TinyUrdfCollisionSphere
+            TinyUrdfCollisionCapsule
+            TinyUrdfCollisionPlane
+            TinyUrdfCollisionMesh
+
+            forward_kinematics
+            forward_dynamics
+            integrate_euler
+            integrate_euler_qdd
+            compute_inertia_dyad
+            point_jacobian
+            quat_integrate
+            inverse_kinematics
+            link_transform_base_frame
+            find_file
+
+            NeuralNetwork
+            fraction
+            copy
+            mass_matrix
+           TinyMatrixXxX
+           TinyMatrix3x3
 
     )pbdoc";
 
