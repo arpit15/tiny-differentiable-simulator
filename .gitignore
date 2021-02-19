@@ -6,3 +6,4 @@ Dockerfile
 *.so
 __pycache__
 .vscode
+.DS_Store

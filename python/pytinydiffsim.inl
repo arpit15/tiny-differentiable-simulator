@@ -34,6 +34,7 @@
             TinyMultiBodyConstraintSolver
             TinyRaycast
 
+            TinyUrdfParser
             TinyUrdfGeometry
             TinyUrdfCollision
             TinyUrdfVisual
@@ -49,6 +50,9 @@
 
             forward_kinematics
             forward_dynamics
+            get_collision_dispatcher
+            compute_contacts_multi_body
+            resolve_collision
             integrate_euler
             integrate_euler_qdd
             compute_inertia_dyad

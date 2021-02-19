@@ -15,11 +15,12 @@
 # limitations under the License.
 
 import os
-
+from os.path import join
 import meshcat
 import meshcat.geometry as g
 import pytinydiffsim as dp
 import numpy as np
+import random
 
 
 class VisualLinkInfo(object):
@@ -32,10 +33,10 @@ class VisualLinkInfo(object):
 
 
 def convert_link_visuals(link, link_index, material, vis, uid, b2vis, path_prefix):
-  print("convert_link_visuals:: num_visuals=", len(link.urdf_visual_shapes))
-  print("link.urdf_visual_shapes=", link.urdf_visual_shapes)
+  # print("convert_link_visuals:: num_visuals=", len(link.urdf_visual_shapes))
+  # print("link.urdf_visual_shapes=", link.urdf_visual_shapes)
   for v in link.urdf_visual_shapes:
-    print("v.geom_type=", v.geometry.geom_type)
+    # print("v.geom_type=", v.geometry.geom_type)
     vis_name = link.link_name + str(uid)
     b2v = VisualLinkInfo()
     b2v.vis_name = vis_name
@@ -45,9 +46,12 @@ def convert_link_visuals(link, link_index, material, vis, uid, b2vis, path_prefi
     b2v.inertia_xyz = link.urdf_inertial.origin_xyz
     b2v.inertia_rpy = link.urdf_inertial.origin_rpy
 
+    color = "0x"+''.join([random.choice('0123456789ABCDEF') for j in range(6)])
+    material.color = color
+
     if v.geometry.geom_type == dp.SPHERE_TYPE:
 
-      print("v.geom_radius=", v.geometry.sphere.radius)
+      # print("v.geom_radius=", v.geometry.sphere.radius)
       if (v.geometry.sphere.radius > 0.):
         print("created sphere!")
         vis[vis_name].set_object(g.Sphere(v.geometry.sphere.radius), material)
@@ -55,14 +59,14 @@ def convert_link_visuals(link, link_index, material, vis, uid, b2vis, path_prefi
         uid += 1
 
     if v.geometry.geom_type == dp.MESH_TYPE:
-      print("mesh filename=", path_prefix+v.geometry.mesh.file_name)
+      print("mesh filename=", join(path_prefix,v.geometry.mesh.file_name))
       print("not using geom_meshscale=", v.geometry.mesh.scale)
       vis_name = link.link_name + str(uid)
       ext = os.path.splitext(v.geometry.mesh.file_name)[-1]
       if ext == ".obj":
-        mesh_obj = g.ObjMeshGeometry.from_file(path_prefix+v.geometry.mesh.file_name)
+        mesh_obj = g.ObjMeshGeometry.from_file(join(path_prefix, v.geometry.mesh.file_name))
       elif ext == ".stl":
-        mesh_obj = g.StlMeshGeometry.from_file(path_prefix+v.geometry.mesh.file_name)
+        mesh_obj = g.StlMeshGeometry.from_file(join(path_prefix, v.geometry.mesh.file_name))
       else:
         print(f"Not supported mesh type {ext}")
 
@@ -89,7 +93,8 @@ def convert_visuals(urdf, texture_path, vis, path_prefix=""):
             repeat=[1, 1],
             image=g.PngImage.from_file(texture_path)))
   else:
-    material = g.MeshLambertMaterial(color=0xffffff, reflectivity=0.8)
+
+    material = g.MeshLambertMaterial(color="#0xff22dd", reflectivity=0.8)
   
   #material.transparent=True
   #material.opacity=0.2
