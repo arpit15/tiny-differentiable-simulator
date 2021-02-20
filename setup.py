@@ -161,6 +161,7 @@ elif _platform == "win32":
     CXX_FLAGS += '-DWIN32 '
     CXX_FLAGS += '-DGLEW_STATIC '
     CXX_FLAGS += '/std:c++17 '
+    CXX_FLAGS += "/MACHINE:X64"
     
     pytinyopengl3_libraries = ['Ws2_32', 'Winmm', 'User32', 'Opengl32', 'kernel32', 'glu32', 'Gdi32', 'Comdlg32']
  

@@ -21,6 +21,9 @@ Multiple visualizers are available, see below.
 ## Getting started
 The open-source version builds using CMake and requires a compiler with C++17 support.
 
+Install the TDS python package
+`pip install -e .`
+
 ```
 mkdir build
 cd build
