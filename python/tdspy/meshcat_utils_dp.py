@@ -18,9 +18,11 @@ import os
 from os.path import join
 import meshcat
 import meshcat.geometry as g
+import meshcat.transformations as tf
 import pytinydiffsim as dp
 import numpy as np
 import random
+from ipdb import set_trace
 
 
 class VisualLinkInfo(object):
@@ -72,6 +74,13 @@ def convert_link_visuals(link, link_index, material, vis, uid, b2vis, path_prefi
 
       vis[vis_name].set_object(
           mesh_obj, material)
+    # transform
+    transform_mat = tf.euler_matrix(b2v.origin_rpy[0], b2v.origin_rpy[1], b2v.origin_rpy[2])
+
+    for i in range(3):
+      transform_mat[i,3] = b2v.origin_xyz[i]
+    vis[vis_name].set_transform(transform_mat)
+
     b2v.uid = uid
     b2vis[uid] = b2v
     uid += 1
